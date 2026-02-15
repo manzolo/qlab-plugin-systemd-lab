@@ -31,7 +31,9 @@ A [QLab](https://github.com/manzolo/qlab) plugin that boots a virtual machine pr
 
 | Service | Host Port | VM Port |
 |---------|-----------|---------|
-| SSH     | 2237      | 22      |
+| SSH     | dynamic   | 22      |
+
+> All host ports are dynamically allocated. Use `qlab ports` to see the actual mappings.
 
 ## Pre-installed Services
 
