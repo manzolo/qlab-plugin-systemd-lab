@@ -69,12 +69,27 @@ qlab stop systemd-lab
 
 ## Exercises
 
-1. **Service inspection**: Run `sudo systemctl status sample.service` and read the output — identify PID, memory usage, and recent log lines
-2. **Stop and start**: Stop the sample service with `sudo systemctl stop sample.service`, verify it stopped, then start it again
-3. **Create a custom service**: Write a new unit file in `/etc/systemd/system/myapp.service` that runs a simple script, then enable and start it
-4. **Timer management**: Inspect `sample.timer` with `sudo systemctl list-timers` and `sudo systemctl status sample.timer`, then modify the `OnCalendar=` schedule
-5. **Journal queries**: Use `sudo journalctl -u sample.service --since "5 minutes ago"` to filter logs by time, then try filtering by priority with `-p err`
-6. **Service dependencies**: Edit your custom service to add `After=network.target` and `Requires=network.target`, then verify the dependency tree with `systemctl list-dependencies`
+> **New to systemd?** See the [Step-by-Step Guide](guide.md) for complete walkthroughs with full examples.
+
+| # | Exercise | What you'll do |
+|---|----------|----------------|
+| 1 | **Systemd Anatomy** | Explore unit files, service types, and systemctl basics |
+| 2 | **Service Management** | Start, stop, enable, disable, and restart services |
+| 3 | **Unit Files** | Create custom service unit files from scratch |
+| 4 | **Journald and Logging** | Query logs with journalctl, filter by unit and priority |
+| 5 | **Timers** | Create and manage systemd timers as cron replacements |
+| 6 | **Targets and Boot** | Understand boot targets and service dependencies |
+
+## Automated Tests
+
+An automated test suite validates the exercises against a running VM:
+
+```bash
+# Start the lab first
+qlab run systemd-lab
+# Wait ~60s for cloud-init, then run all tests
+qlab test systemd-lab
+```
 
 ## Resetting
 
