@@ -340,7 +340,7 @@ sudo systemctl daemon-reload
 
 **Goal:** Understand boot targets and analyze startup performance.
 
-Targets are groups of units — they replace the old runlevels. `multi-user.target` is equivalent to runlevel 3 (text mode), `graphical.target` is runlevel 5 (GUI).
+Targets are groups of units — they replace the old runlevels. `multi-user.target` is equivalent to runlevel 3 (text mode). Since this is a server VM with no GUI, the default target is `multi-user.target`.
 
 ### 6.1 Check default target
 
