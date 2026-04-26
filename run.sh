@@ -92,6 +92,10 @@ packages:
   - systemd
   - curl
   - net-tools
+  - zsh
+  - vim
+  - nano
+  - fonts-powerline
 write_files:
   - path: /etc/profile.d/cloud-init-status.sh
     permissions: '0755'
@@ -180,6 +184,13 @@ write_files:
       Type=oneshot
       User=labuser
       ExecStart=/bin/bash -c 'echo "Timer executed at $(date)" >> /home/labuser/timer.log'
+  - path: /tmp/setup-zsh.sh
+    permissions: '0755'
+    content: |
+      #!/bin/bash
+      RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      sed -i 's/^ZSH_THEME=.*/ZSH_THEME="agnoster"/' ~/.zshrc
+      sed -i 's/^plugins=(.*)/plugins=(git)/' ~/.zshrc
 runcmd:
   - chmod -x /etc/update-motd.d/*
   - sed -i 's/^#\?PrintMotd.*/PrintMotd yes/' /etc/ssh/sshd_config
@@ -196,6 +207,8 @@ runcmd:
   - systemctl enable sample.timer
   - systemctl start sample.timer
   - chown -R labuser:labuser /home/labuser
+  - sudo -Hu labuser bash /tmp/setup-zsh.sh
+  - chsh -s /usr/bin/zsh labuser
   - echo "=== systemd-lab VM is ready! ==="
 USERDATA
 
